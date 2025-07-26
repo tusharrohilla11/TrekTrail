@@ -1,0 +1,38 @@
+<!-- THIS IS USING EJS MATE AND IT IS EXPORTING THIS CODE TO SPECIFIED PATH AND WHOLE EJS/HTML DOCUMENT IS COMPLETE PRESENT THERE -->
+<% layout('layouts/boilerplate') %> 
+
+<div id="map" class="cluster-map"></div>
+
+<br />
+<h1>All Treks</h1>
+<br />
+
+<% for(let trek of treks) { %>
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <% if(trek.images.length) { %>
+                    <img crossorigin="anonymous" class="img-fluid" alt="" src="<%=trek.images[0].url%>">
+                <% } else { %>
+                    <img crossorigin="anonymous" class="img-fluid" alt="" src="https://res.cloudinary.com/dsrylwhzq/image/upload/v1706728680/Trackmytrek2/oucdyp1mvwyxy5bxmn6y.jpg">
+                <% } %>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%=trek.title%></h5>
+                    <p class="card-text"><%=trek.description%></p>
+                    <p class="card-text">
+                        <small class="text-muted"><%=trek.location%></small>
+                    </p>
+                    <a href="/treks/<%=trek._id%>" class="btn btn-primary">View <%=trek.title%></a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<script>
+    const treks = <%- JSON.stringify(treks) %>
+</script>
+
+<script src="/javascripts/clusterMap.js"></script>
